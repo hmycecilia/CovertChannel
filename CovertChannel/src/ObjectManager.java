@@ -7,6 +7,15 @@ public class ObjectManager {
 	public void read(Subject s, Object o){	s.TEMP = o.current_value;	}
 
 	public void write(Object o, int val){	o.current_value = val;	}
+	
+	public void create(){};
+	
+	public void destroy(){};
+	
+	public void run(){};
+	
+	
+	
 }
 
 

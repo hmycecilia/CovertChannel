@@ -61,4 +61,13 @@ public class ReferenceMonitor
 		}
 		System.out.println(s.name + " writes value " + val + " to " + o.name);
 	}
+	
+	void executeCreate(){};
+	
+	void executeDestroy(){};
+	
+	void executeRun(){};
+	
+	
+	
 }
