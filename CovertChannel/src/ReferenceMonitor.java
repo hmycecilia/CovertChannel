@@ -66,14 +66,25 @@ public class ReferenceMonitor
 	{
 		if (!object_man.object_map.containsKey(obj))
 		{
-			object_man.create(obj, subject_map.get(sub).sl);
+			object_man.create(obj, subject_map.get(sub).sl, ref_map);
+			
 		}
-	};
+	}
 	
-	void executeDestroy(){};
+	void executeDestroy(String sub, String obj)
+	{
+		if (!object_man.object_map.containsKey(obj))
+		{
+			if (SecurityLevel.can_write(subject_map.get(sub).sl, object_man.object_map.get(obj).sl))
+			{
+				Subject s = subject_map.get(sub);
+				Object o = object_man.object_map.get(obj);
+				object_man.destroy(s, o, ref_map);
+			}
+		}
+	}
 	
-	void executeRun(){};
-	
+	void executeRun(){}	
 	
 	
 }

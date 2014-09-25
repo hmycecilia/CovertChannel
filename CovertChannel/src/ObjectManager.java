@@ -8,14 +8,25 @@ public class ObjectManager {
 
 	public void write(Object o, int val){	o.current_value = val;	}
 	
-	public void create(String o, int sl)
+	public void create(String o, int sl, HashMap<String, Integer> r)
 	{
-		Object obj = new Object(o, sl);
-	};
+		Object obj = new Object(o.toLowerCase(), sl);
+		obj.print_name = o;
+		object_map.put(obj.name, obj);
+		r.put(obj.name, sl);
+		
+	}
 	
-	public void destroy(Subject s, Object o){};
+	public void destroy(Subject s, Object o, HashMap<String, Integer> r)
+	{
+		object_map.remove(o.name);
+		r.remove(o.name);
+	}
 	
-	public void run(Subject s){};
+	public void run(Subject s)
+	{
+		//do the bit fiddling
+	}
 	
 	
 	

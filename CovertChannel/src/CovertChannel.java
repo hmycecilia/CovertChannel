@@ -28,7 +28,7 @@ public class CovertChannel
 			InstructionObject trogdor = new InstructionObject();
 			trogdor.parseInstructions(it.next());
 			ref_mon.useInstruction(trogdor);
-			print_instruction_state(hobj, lobj, hal, lyle);
+			//print_instruction_state(hobj, lobj, hal, lyle);
 		}	
         
         
