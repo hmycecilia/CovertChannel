@@ -11,7 +11,7 @@ public class ObjectManager {
 	public void create(String o, int sl, HashMap<String, Integer> r)
 	{
 		Object obj = new Object(o.toLowerCase(), sl);
-		obj.print_name = o;
+		obj.add_print_name(o);
 		object_map.put(obj.name, obj);
 		r.put(obj.name, sl);
 		
