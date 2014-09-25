@@ -8,11 +8,14 @@ public class ObjectManager {
 
 	public void write(Object o, int val){	o.current_value = val;	}
 	
-	public void create(){};
+	public void create(String o, int sl)
+	{
+		Object obj = new Object(o, sl);
+	};
 	
-	public void destroy(){};
+	public void destroy(Subject s, Object o){};
 	
-	public void run(){};
+	public void run(Subject s){};
 	
 	
 	

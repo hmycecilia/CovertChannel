@@ -62,7 +62,13 @@ public class ReferenceMonitor
 		System.out.println(s.name + " writes value " + val + " to " + o.name);
 	}
 	
-	void executeCreate(){};
+	void executeCreate(String sub, String obj)
+	{
+		if (!object_man.object_map.containsKey(obj))
+		{
+			object_man.create(obj, subject_map.get(sub).sl);
+		}
+	};
 	
 	void executeDestroy(){};
 	
