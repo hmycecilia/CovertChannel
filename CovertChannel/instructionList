@@ -1,0 +1,11 @@
+write hal hobj 42
+read hal hobj
+write lyle hobj 2014
+read lyle hobj
+read hal hobj
+write lyle lobj 20
+write hal lobj 9001
+read hal lobj
+read lyle lobj
+write hal lobj
+write lyle hobj

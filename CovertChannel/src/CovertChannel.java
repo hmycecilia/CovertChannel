@@ -1,6 +1,12 @@
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +20,11 @@ public class CovertChannel
 		
         ReferenceMonitor ref_mon = new ReferenceMonitor();
         
-        
+        Path path = Paths.get(args[0]);
+        byte [] data = Files.readAllBytes(path);
+        System.out.println(data);
+//        byte[] buf = read(new File ("inputfilename"));
+//		ByteArrayInputStream is = new ByteArrayInputStream(buf);
         
         
 		//name of the instruction file
@@ -29,14 +39,28 @@ public class CovertChannel
 			trogdor.parseInstructions(it.next());
 			ref_mon.useInstruction(trogdor);
 			//print_instruction_state(hobj, lobj, hal, lyle);
-		}	
-        
-        
+		}
         
 	}
 	
 	
-	
+	private static byte[] read (File file) throws IOException
+	{
+		byte [] buffer = new byte[(int) file.length()];
+		InputStream i = null;
+		try
+		{
+			i = new FileInputStream(file);
+			if (i.read(buffer) == -1)
+				throw new IOException("Eof reached trying to read.");
+		}
+		finally
+		{
+			if (i != null)
+				i.close();
+		}
+		return buffer;
+	}
 	
 	private static void print_instruction_state(Object high, Object low, Subject h, Subject l) 
 	{

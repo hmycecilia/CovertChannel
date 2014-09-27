@@ -87,7 +87,7 @@ public class ReferenceMonitor
 	public void executeRun(String sub)
 	{
 		Subject s = subject_map.get(sub);
-		
+		object_man.run(s);
 	}	
 	
 	
