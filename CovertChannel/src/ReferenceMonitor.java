@@ -2,6 +2,9 @@ import java.util.HashMap;
 
 public class ReferenceMonitor 
 {
+	public static final String r = "read";
+	public static final String w = "write";
+	
 	static HashMap<String, Integer> ref_map = new HashMap<String, Integer>();
 	HashMap<String, Subject> subject_map = new HashMap<String, Subject>();
 	ObjectManager object_man = new ObjectManager();
@@ -18,10 +21,10 @@ public class ReferenceMonitor
     {
     	if(subject_map.containsKey(io.subject) && object_man.object_map.containsKey(io.object))
     	{
-    		if(io.command.equals(Secure_System.r))
+    		if(io.command.equals(r))
     		{
     			executeRead(io.subject, io.object);
-    		}else if(io.command.equals(Secure_System.w))
+    		}else if(io.command.equals(w))
     		{
     			executeWrite(io.subject, io.object, io.value);
     		}else
