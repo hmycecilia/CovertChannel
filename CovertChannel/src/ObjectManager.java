@@ -1,7 +1,11 @@
 import java.util.HashMap;
 
 
-public class ObjectManager {
+public class ObjectManager 
+{
+	int a;
+	int num_bits = 0;
+	
 	public HashMap<String, Object> object_map = new HashMap<String, Object>();
 
 	public void read(Subject s, Object o){	s.TEMP = o.current_value;	}
@@ -25,7 +29,16 @@ public class ObjectManager {
 	
 	public void run(Subject s)
 	{
-		//do the bit fiddling
+		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
+			a = a | (1 << num_bits);
+		else
+			a = a | (0 << num_bits);
+		num_bits++;
+		if (num_bits > 7)
+		{
+			System.out.println(a);
+			a = 0;
+		}
 	}
 	
 	

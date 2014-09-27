@@ -47,7 +47,8 @@ public class CovertChannel
        System.out.println("	" + h.print_name + " has recently read: " + h.TEMP);
 	}
 
-	static List<String> readSmallTextFile(String aFileName) throws IOException {
+	static List<String> readSmallTextFile(String aFileName) throws IOException 
+	{
 		   return Files.readAllLines(Paths.get(aFileName), StandardCharsets.UTF_8);
 	}
 	

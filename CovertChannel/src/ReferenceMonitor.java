@@ -34,7 +34,7 @@ public class ReferenceMonitor
     	}
     }
 	
-	void executeRead(String sub, String obj)
+	public void executeRead(String sub, String obj)
 	{
 		Subject s = subject_map.get(sub);
 		Object o = object_man.object_map.get(obj);
@@ -50,7 +50,7 @@ public class ReferenceMonitor
 		System.out.println(s.name + " reads " + o.name);
 	}
 	
-	void executeWrite(String sub, String obj, int val)
+	public void executeWrite(String sub, String obj, int val)
 	{
 		Subject s = subject_map.get(sub);
 		Object o = object_man.object_map.get(obj);		
@@ -62,7 +62,7 @@ public class ReferenceMonitor
 		System.out.println(s.name + " writes value " + val + " to " + o.name);
 	}
 	
-	void executeCreate(String sub, String obj)
+	public void executeCreate(String sub, String obj)
 	{
 		if (!object_man.object_map.containsKey(obj))
 		{
@@ -71,7 +71,7 @@ public class ReferenceMonitor
 		}
 	}
 	
-	void executeDestroy(String sub, String obj)
+	public void executeDestroy(String sub, String obj)
 	{
 		if (!object_man.object_map.containsKey(obj))
 		{
@@ -84,8 +84,9 @@ public class ReferenceMonitor
 		}
 	}
 	
-	void executeRun()
+	public void executeRun(String sub)
 	{
+		Subject s = subject_map.get(sub);
 		
 	}	
 	
