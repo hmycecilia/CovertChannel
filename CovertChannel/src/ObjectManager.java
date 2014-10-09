@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashMap;
 
 
@@ -27,7 +28,7 @@ public class ObjectManager
 		r.remove(o.name);
 	}
 	
-	public void run(Subject s)
+	public void run(Subject s) throws IOException
 	{
 		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
 			a = (byte) (a | (1 << num_bits));
@@ -36,8 +37,8 @@ public class ObjectManager
 		num_bits++;
 		if (num_bits > 7)
 		{
-			CovertChannel.
-			System.out.println(a);
+			s.filethingy.write(new byte[]{a});
+//			System.out.println(a);
 			a = 0;
 		}
 	}

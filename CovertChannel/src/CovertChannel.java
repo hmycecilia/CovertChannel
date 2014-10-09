@@ -71,11 +71,7 @@ public class CovertChannel
 			ref_mon.useInstruction(trogdor);
 			//print_instruction_state(hobj, lobj, hal, lyle);
 		}
-        
-		public static write_to_file(byte b)
-		{
-			out.write(new byte[]{b});
-		}
+
 		
 	}
 	
@@ -133,13 +129,15 @@ class Subject
 	String print_name;
 	int TEMP;
 	int sl;
+	FileOutputStream filethingy;
 	
 	//create a subject. TEMP is set to 0 on default
-	Subject(String s, int sl)
+	Subject(String s, int sl, FileOutputStream f)
 	{
 		name = s;
 		TEMP = 0;
 		this.sl = sl;
+		filethingy = f;
 	}
 	
 	void add_print_name(String s)

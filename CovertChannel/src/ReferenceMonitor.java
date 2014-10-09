@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashMap;
 
 public class ReferenceMonitor 
@@ -87,7 +88,7 @@ public class ReferenceMonitor
 		}
 	}
 	
-	public void executeRun(String sub)
+	public void executeRun(String sub) throws IOException
 	{
 		Subject s = subject_map.get(sub);
 		object_man.run(s);
