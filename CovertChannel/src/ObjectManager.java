@@ -31,9 +31,9 @@ public class ObjectManager
 	public void run(Subject s) throws IOException
 	{
 		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
-			a = (byte) (a | (1 << num_bits));
+			a = (byte) (a & (1 << num_bits));
 		else
-			a = (byte) (a | (0 << num_bits));
+			a = (byte) (a & (0 << num_bits));
 		num_bits++;
 		if (num_bits > 7)
 		{

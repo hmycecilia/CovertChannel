@@ -43,7 +43,6 @@ public class CovertChannel
         else{	out = new FileOutputStream(args[0] + ".out");	}        	
 
 		ByteArrayInputStream is = new ByteArrayInputStream(data);
-		
         
 		InstructionObject lyle_create = new InstructionObject();
 		lyle_create.parseInstructions("CREATE LYLE OBJ");
@@ -68,56 +67,22 @@ public class CovertChannel
 		
         while ((c = (byte) is.read()) != -1)
         {
-        	System.out.println(c);
+        	System.out.println("C = : " + Integer.toString(c, 2));
+        	Integer nom = 0;
+        	for (int i = 7; i >= 0; i--)
+        	{
+        		nom = (c & (1 << i));
+        		nom >>= i;
+        	}
         }
 
 		out.close();
-	}
-	
-	private static void lyle_inst()
-	{
-//		  CREATE LYLE OBJ
-//		  WRITE LYLE OBJ 1
-//		  READ LYLE OBJ
-//		  DESTROY LYLE OBJ
-//		  RUN LYLE
-	}
-	
-
-	
-	private static byte[] read (File file) throws IOException
-	{
-		byte [] buffer = new byte[(int) file.length()];
-		InputStream i = null;
-		try
-		{
-			i = new FileInputStream(file);
-			if (i.read(buffer) == -1)
-				throw new IOException("Eof reached trying to read.");
-		}
-		finally
-		{
-			if (i != null)
-				i.close();
-		}
-		return buffer;
-	}
-	
-	private static void print_instruction_state(Object high, Object low, Subject h, Subject l) 
-	{
-       System.out.println("The current state is: ");
-       System.out.println("	" + low.print_name + " has value: " + low.current_value);
-       System.out.println("	" + high.print_name + " has value: " + high.current_value);
-       System.out.println("	" + l.print_name + " has recently read: " + l.TEMP);
-       System.out.println("	" + h.print_name + " has recently read: " + h.TEMP);
-	}
+	}	
 
 	static List<String> readSmallTextFile(String aFileName) throws IOException 
 	{
 		   return Files.readAllLines(Paths.get(aFileName), StandardCharsets.UTF_8);
 	}
-	
-	
 	
 }
 
