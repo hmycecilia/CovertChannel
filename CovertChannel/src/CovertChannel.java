@@ -38,22 +38,18 @@ public class CovertChannel
         
         byte [] data = Files.readAllBytes(path);
         
-        FileOutputStream out = new FileOutputStream(args[1] + ".out");
-        if(VERBOSE)
+        FileOutputStream out = null;
+        if(VERBOSE){	out = new FileOutputStream(args[1] + ".out");	}
+        else{	out = new FileOutputStream(args[0] + ".out");	}        	
+
+		ByteArrayInputStream is = new ByteArrayInputStream(data);
+		
+		byte c;
+		
+        while ((c = (byte) is.read()) != -1)
         {
-        	
+        	System.out.println(c);
         }
-        	
-        
-    	System.out.println(data);
-        
-        System.out.println(VERBOSE);
-        
-        
-        
-//        byte[] buf = read(new File ("inputfilename"));
-//		ByteArrayInputStream is = new ByteArrayInputStream(buf);
-        
         
 		//name of the instruction file
         if(VERBOSE){	System.out.print("Reading from file: " + args[1] + "\n");	}
@@ -72,7 +68,7 @@ public class CovertChannel
 			//print_instruction_state(hobj, lobj, hal, lyle);
 		}
 
-		
+		out.close();
 	}
 	
 	private static void lyle_inst()
