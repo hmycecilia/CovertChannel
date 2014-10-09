@@ -20,9 +20,24 @@ public class CovertChannel
 		
         ReferenceMonitor ref_mon = new ReferenceMonitor();
         
-        Path path = Paths.get(args[0]);
+        Path path = null;
+        boolean VERBOSE = false;
+        
+        if(args.length == 1)
+        {
+        	path = Paths.get(args[0]);
+        }
+        else if(args.length == 2)
+        {
+        	path = Paths.get(args[1]);
+        	VERBOSE = true;
+        }
+        
         byte [] data = Files.readAllBytes(path);
-        System.out.println(data);
+    	System.out.println(data);
+        
+        System.out.println(VERBOSE);
+        
 //        byte[] buf = read(new File ("inputfilename"));
 //		ByteArrayInputStream is = new ByteArrayInputStream(buf);
         
