@@ -30,6 +30,7 @@ public class ObjectManager
 	
 	public void run(Subject s) throws IOException
 	{
+		System.out.println(s.name);
 		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
 			a = (byte) (a & (1 << num_bits));
 		else
@@ -38,7 +39,7 @@ public class ObjectManager
 		if (num_bits > 7)
 		{
 			s.filethingy.write(new byte[]{a});
-//			System.out.println(a);
+			System.out.println(a);
 			a = 0;
 		}
 	}

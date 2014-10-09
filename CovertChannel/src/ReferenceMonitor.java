@@ -5,6 +5,9 @@ public class ReferenceMonitor
 {
 	public static final String r = "read";
 	public static final String w = "write";
+	public static final String c = "create";
+	public static final String d = "destroy";
+	public static final String run = "run";
 	
 	static HashMap<String, Integer> ref_map = new HashMap<String, Integer>();
 	HashMap<String, Subject> subject_map = new HashMap<String, Subject>();
@@ -18,7 +21,7 @@ public class ReferenceMonitor
     {	return ref_map.get(s);	}
 
 	
-    public void useInstruction(InstructionObject io) 
+    public void useInstruction(InstructionObject io) throws IOException 
     {
     	if(subject_map.containsKey(io.subject) && object_man.object_map.containsKey(io.object))
     	{
@@ -28,7 +31,20 @@ public class ReferenceMonitor
     		}else if(io.command.equals(w))
     		{
     			executeWrite(io.subject, io.object, io.value);
-    		}else
+    		}
+    		else if (io.command.equals(c))
+    		{
+    			executeCreate(io.subject, io.object);
+    		}
+    		else if (io.command.equals(d))
+    		{
+    			executeDestroy(io.subject, io.object);
+    		}
+    		else if (io.command.equals(run))
+    		{
+    			executeRun(io.subject);
+    		}
+    		else
     		{
 //    			System.out.println("Bad Instruction");
     		}
@@ -70,8 +86,7 @@ public class ReferenceMonitor
 	{
 		if (!object_man.object_map.containsKey(obj))
 		{
-			object_man.create(obj, subject_map.get(sub).sl, ref_map);
-			
+			object_man.create(obj, subject_map.get(sub).sl, ref_map);		
 		}
 	}
 	
@@ -91,6 +106,7 @@ public class ReferenceMonitor
 	public void executeRun(String sub) throws IOException
 	{
 		Subject s = subject_map.get(sub);
+		System.out.println("Why is execeuteRun not running?!");
 		object_man.run(s);
 	}	
 	

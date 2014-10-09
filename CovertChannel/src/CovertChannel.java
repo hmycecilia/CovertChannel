@@ -43,6 +43,17 @@ public class CovertChannel
         else{	out = new FileOutputStream(args[0] + ".out");	}        	
 
 		ByteArrayInputStream is = new ByteArrayInputStream(data);
+		
+        Subject lyle = new Subject("lyle", SecurityLevel.low, out);
+        lyle.add_print_name("Lyle");
+        Subject hal = new Subject("hal", SecurityLevel.high, out);
+        hal.add_print_name("Hal");
+        
+        ref_mon.RM_insert(lyle.name.toLowerCase(), lyle.sl);
+        ref_mon.RM_insert(hal.name.toLowerCase(), hal.sl);
+        
+        ref_mon.subject_map.put(lyle.name.toLowerCase(), lyle);
+        ref_mon.subject_map.put(hal.name.toLowerCase(), hal);
         
 		InstructionObject lyle_create = new InstructionObject();
 		lyle_create.parseInstructions("CREATE LYLE OBJ");
@@ -67,12 +78,21 @@ public class CovertChannel
 		
         while ((c = (byte) is.read()) != -1)
         {
-        	System.out.println("C = : " + Integer.toString(c, 2));
+//        	System.out.println("C = : " + Integer.toString(c, 2));
         	Integer nom = 0;
         	for (int i = 7; i >= 0; i--)
         	{
         		nom = (c & (1 << i));
         		nom >>= i;
+        		if (nom == 0)
+        		{
+        			use_hal(hal_create, ref_mon);
+        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run);
+        		}
+        		else
+        		{
+        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run);
+        		}
         	}
         }
 
@@ -84,6 +104,21 @@ public class CovertChannel
 		   return Files.readAllLines(Paths.get(aFileName), StandardCharsets.UTF_8);
 	}
 	
+	private static void use_hal (InstructionObject a, ReferenceMonitor ref_mon) throws IOException
+
+	{
+		ref_mon.useInstruction(a);
+	}
+	
+	private static void use_lyle (ReferenceMonitor ref_mon, InstructionObject lyle_create, InstructionObject lyle_write, InstructionObject lyle_read,
+			InstructionObject lyle_destroy, InstructionObject lyle_run) throws IOException
+	{
+		ref_mon.useInstruction(lyle_create);
+		ref_mon.useInstruction(lyle_write);
+		ref_mon.useInstruction(lyle_read);
+		ref_mon.useInstruction(lyle_destroy);
+		ref_mon.useInstruction(lyle_run);
+	}
 }
 
 
