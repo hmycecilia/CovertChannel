@@ -44,29 +44,32 @@ public class CovertChannel
 
 		ByteArrayInputStream is = new ByteArrayInputStream(data);
 		
+        
+		InstructionObject lyle_create = new InstructionObject();
+		lyle_create.parseInstructions("CREATE LYLE OBJ");
+		InstructionObject lyle_write = new InstructionObject();
+		lyle_write.parseInstructions("WRITE LYLE OBJ 7");
+		InstructionObject lyle_read = new InstructionObject();
+		lyle_read.parseInstructions("READ LYLE OBJ");
+		InstructionObject lyle_destroy = new InstructionObject();
+		lyle_destroy.parseInstructions("DESTROY LYLE OBJ");
+		InstructionObject lyle_run = new InstructionObject();
+		lyle_run.parseInstructions("RUN LYLE");
+		InstructionObject hal_create = new InstructionObject();
+		hal_create.parseInstructions("CREATE HAL OBJ");
+		
+		//name of the instruction file
+        if(VERBOSE){	System.out.print("Reading from file: " + args[1] + "\n");	}
+        else{	System.out.print("Reading from file: " + args[0] + "\n");	}
+        
+		//loop that runs and prints the status of each instruction
+		
 		byte c;
 		
         while ((c = (byte) is.read()) != -1)
         {
         	System.out.println(c);
         }
-        
-		//name of the instruction file
-        if(VERBOSE){	System.out.print("Reading from file: " + args[1] + "\n");	}
-        else{	System.out.print("Reading from file: " + args[0] + "\n");	}
-				
-        
-        
-		//loop that runs and prints the status of each instruction
-		Iterator<String> it = instructions.iterator();
-		while(it.hasNext())
-		{
-			System.out.println();
-			InstructionObject trogdor = new InstructionObject();
-			trogdor.parseInstructions(it.next());
-			ref_mon.useInstruction(trogdor);
-			//print_instruction_state(hobj, lobj, hal, lyle);
-		}
 
 		out.close();
 	}
