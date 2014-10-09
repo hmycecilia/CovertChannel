@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 public class ObjectManager 
 {
-	int a;
-	int num_bits = 0;
+	byte a = 0;
+	byte num_bits = 0;
 	
 	public HashMap<String, Object> object_map = new HashMap<String, Object>();
 
@@ -30,12 +30,13 @@ public class ObjectManager
 	public void run(Subject s)
 	{
 		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
-			a = a | (1 << num_bits);
+			a = (byte) (a | (1 << num_bits));
 		else
-			a = a | (0 << num_bits);
+			a = (byte) (a | (0 << num_bits));
 		num_bits++;
 		if (num_bits > 7)
 		{
+			CovertChannel.
 			System.out.println(a);
 			a = 0;
 		}

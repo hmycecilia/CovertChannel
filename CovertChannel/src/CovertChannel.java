@@ -2,6 +2,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -16,35 +17,50 @@ public class CovertChannel
 {
 	public static void main(String[] args) throws IOException 
 	{
-		List<String> instructions = readSmallTextFile(args[0]);
+		List<String> instructions = null;
 		
         ReferenceMonitor ref_mon = new ReferenceMonitor();
-        
+                
         Path path = null;
         boolean VERBOSE = false;
         
         if(args.length == 1)
         {
         	path = Paths.get(args[0]);
+        	instructions = readSmallTextFile(args[0]);
         }
         else if(args.length == 2)
         {
         	path = Paths.get(args[1]);
+        	instructions = readSmallTextFile(args[1]);
         	VERBOSE = true;
         }
         
         byte [] data = Files.readAllBytes(path);
+        
+        FileOutputStream out = new FileOutputStream(args[1] + ".out");
+        if(VERBOSE)
+        {
+        	
+        }
+        	
+        
     	System.out.println(data);
         
         System.out.println(VERBOSE);
+        
+        
         
 //        byte[] buf = read(new File ("inputfilename"));
 //		ByteArrayInputStream is = new ByteArrayInputStream(buf);
         
         
 		//name of the instruction file
-		System.out.print("Reading from file: " + args[0] + "\n");
+        if(VERBOSE){	System.out.print("Reading from file: " + args[1] + "\n");	}
+        else{	System.out.print("Reading from file: " + args[0] + "\n");	}
 				
+        
+        
 		//loop that runs and prints the status of each instruction
 		Iterator<String> it = instructions.iterator();
 		while(it.hasNext())
@@ -56,8 +72,23 @@ public class CovertChannel
 			//print_instruction_state(hobj, lobj, hal, lyle);
 		}
         
+		public static write_to_file(byte b)
+		{
+			out.write(new byte[]{b});
+		}
+		
 	}
 	
+	private static void lyle_inst()
+	{
+//		  CREATE LYLE OBJ
+//		  WRITE LYLE OBJ 1
+//		  READ LYLE OBJ
+//		  DESTROY LYLE OBJ
+//		  RUN LYLE
+	}
+	
+
 	
 	private static byte[] read (File file) throws IOException
 	{

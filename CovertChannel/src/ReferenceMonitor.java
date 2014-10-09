@@ -29,11 +29,11 @@ public class ReferenceMonitor
     			executeWrite(io.subject, io.object, io.value);
     		}else
     		{
-    			System.out.println("Bad Instruction");
+//    			System.out.println("Bad Instruction");
     		}
     	}else
     	{
-    		System.out.println("Bad instruction");
+//    		System.out.println("Bad instruction");
     	}
     }
 	
@@ -50,7 +50,7 @@ public class ReferenceMonitor
 			//doesn't dominate, set the TEMP to 0 as the default
 			subject_map.get(sub).TEMP = 0;
 		}
-		System.out.println(s.name + " reads " + o.name);
+//		System.out.println(s.name + " reads " + o.name);
 	}
 	
 	public void executeWrite(String sub, String obj, int val)
@@ -62,7 +62,7 @@ public class ReferenceMonitor
 		{
 			object_man.write(o, val);
 		}
-		System.out.println(s.name + " writes value " + val + " to " + o.name);
+//		System.out.println(s.name + " writes value " + val + " to " + o.name);
 	}
 	
 	public void executeCreate(String sub, String obj)
