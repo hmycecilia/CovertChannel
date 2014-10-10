@@ -32,10 +32,6 @@ public class ReferenceMonitor
     		{
     			executeWrite(io.subject, io.object, io.value);
     		}
-    		else if (io.command.equals(c))
-    		{
-    			executeCreate(io.subject, io.object);
-    		}
     		else if (io.command.equals(d))
     		{
     			executeDestroy(io.subject, io.object);
@@ -48,7 +44,13 @@ public class ReferenceMonitor
     		{
 //    			System.out.println("Bad Instruction");
     		}
-    	}else
+    	}
+		else if (io.command.equals(c))
+		{
+			System.out.println("let's create");
+			executeCreate(io.subject, io.object);
+		}
+    	else
     	{
 //    		System.out.println("Bad instruction");
     	}
@@ -84,6 +86,7 @@ public class ReferenceMonitor
 	
 	public void executeCreate(String sub, String obj)
 	{
+		System.out.println("In create");
 		if (!object_man.object_map.containsKey(obj))
 		{
 			object_man.create(obj, subject_map.get(sub).sl, ref_map);		
