@@ -18,29 +18,33 @@ public class CovertChannel
 {
 	public static void main(String[] args) throws IOException 
 	{
-		
+		//create the reference monitor to hold the subjects and objects and their security levels
         ReferenceMonitor ref_mon = new ReferenceMonitor();
-                
+        
+        //variable initialization
         Path path = null;
         boolean VERBOSE = false;
+        FileOutputStream out = null;
+        PrintWriter log = null;
         
+        //sets up the variable above based on if is verbose mode or not.
         if(args.length == 1)
         {
         	path = Paths.get(args[0]);
+        	out = new FileOutputStream(args[0] + ".out");
         }
         else if(args.length == 2)
         {
         	path = Paths.get(args[1]);
         	VERBOSE = true;
+        	out = new FileOutputStream(args[1] + ".out");	
+        	log = new PrintWriter(new File("log"));
         }
         
+        //read the entire file into this byte array
         byte [] data = Files.readAllBytes(path);
         
-        FileOutputStream out = null;
-        PrintWriter log = null;
-        if(VERBOSE){	out = new FileOutputStream(args[1] + ".out");	log = new PrintWriter(new File("log"));}
-        else{	out = new FileOutputStream(args[0] + ".out");	}   
-
+        //create a stream on the array
 		ByteArrayInputStream is = new ByteArrayInputStream(data);
 		
         Subject lyle = new Subject("lyle", SecurityLevel.low, out);
