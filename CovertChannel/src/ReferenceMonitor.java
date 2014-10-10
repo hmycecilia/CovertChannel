@@ -81,7 +81,6 @@ public class ReferenceMonitor
 	
 	public void executeWrite(String sub, String obj, int val)
 	{
-		Subject s = subject_map.get(sub);
 		Object o = object_man.object_map.get(obj);		
 		
 		if(SecurityLevel.can_write(RM_get(sub).intValue(), RM_get(obj).intValue()))

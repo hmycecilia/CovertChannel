@@ -1,16 +1,12 @@
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -78,9 +74,13 @@ public class CovertChannel
 		//loop that runs and prints the status of each instruction
 		
 		int c;
+		Stopwatch sc = new Stopwatch();
+		long numbytes = 0;
 		
+		sc.start();
         while ((c = (byte) is.read()) != -1)
         {
+        	numbytes++;
         	Integer nom = 0;
         	for (int i = 6; i >= 0; i--)
         	{
@@ -97,10 +97,12 @@ public class CovertChannel
         		}
         	}
         }
-
+        sc.stop();
 		out.close();
 		if (VERBOSE)
 			log.close();
+		else
+			System.out.println(args[0] + " " + (numbytes) + " bytes " + (((numbytes * 8) / (sc.time() * 1000))) + " bits/ms");
 	}	
 
 	static List<String> readSmallTextFile(String aFileName) throws IOException 
@@ -194,4 +196,52 @@ class SecurityLevel{
         if (subject_level <= object_Level){		return true;		}
         else{	return false;	}
     }
+}
+
+class Stopwatch 
+{	
+    private long startTime;
+    private long stopTime;
+
+    public static final double NANOS_PER_SEC = 1000000000.0;
+
+	/**
+	 start the stop watch.
+	*/
+	public void start()
+	{	
+		System.gc();
+		startTime = System.nanoTime();
+	}
+
+	/**
+	 stop the stop watch.
+	*/
+	public void stop()
+	{	
+		stopTime = System.nanoTime();	
+	}
+
+	/**
+	elapsed time in seconds.
+	@return the time recorded on the stopwatch in seconds
+	*/
+	public double time()
+	{	
+		return (stopTime - startTime) / NANOS_PER_SEC;	
+	}
+
+	public String toString()
+	{   
+		return "elapsed time: " + time() + " seconds.";
+	}
+
+	/**
+	elapsed time in nanoseconds.
+	@return the time recorded on the stopwatch in nanoseconds
+	*/
+	public long timeInNanoseconds()
+	{	
+		return (stopTime - startTime);	
+	}
 }
