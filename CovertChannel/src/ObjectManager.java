@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class ObjectManager 
 {
-	byte a = 0;
-	byte num_bits = 0;
+	Integer a = 0;
+	byte num_bits = 7;
 	
 	public HashMap<String, Object> object_map = new HashMap<String, Object>();
 
@@ -15,6 +15,7 @@ public class ObjectManager
 	
 	public void create(String o, int sl, HashMap<String, Integer> r)
 	{
+//		System.out.println("SL in create: " + sl);
 		Object obj = new Object(o.toLowerCase(), sl);
 		obj.add_print_name(o);
 		object_map.put(obj.name, obj);
@@ -24,23 +25,26 @@ public class ObjectManager
 	
 	public void destroy(Subject s, Object o, HashMap<String, Integer> r)
 	{
+//		System.out.println("Object name in destroy: " + o.name);
 		object_map.remove(o.name);
 		r.remove(o.name);
 	}
 	
 	public void run(Subject s) throws IOException
 	{
-		System.out.println(s.name);
+		System.out.println("Temp: " + s.TEMP);
 		if (s.TEMP == 1) //Lyle should add 1 to byte if his TEMP is 1 after read.
-			a = (byte) (a & (1 << num_bits));
+			a = (a | (1 << num_bits));
 		else
-			a = (byte) (a & (0 << num_bits));
-		num_bits++;
-		if (num_bits > 7)
+			a = (a | (0 << num_bits));
+		num_bits--;
+		System.out.println(a);
+		if (num_bits == 0)
 		{
-			s.filethingy.write(new byte[]{a});
-			System.out.println(a);
-			a = 0;
+			s.filethingy.write(new byte[]{a.byteValue()});
+			num_bits = 7;
+			a= 0;
+			System.out.println();
 		}
 	}
 	

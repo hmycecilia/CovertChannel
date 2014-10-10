@@ -58,7 +58,7 @@ public class CovertChannel
 		InstructionObject lyle_create = new InstructionObject();
 		lyle_create.parseInstructions("CREATE LYLE OBJ");
 		InstructionObject lyle_write = new InstructionObject();
-		lyle_write.parseInstructions("WRITE LYLE OBJ 7");
+		lyle_write.parseInstructions("WRITE LYLE OBJ 1");
 		InstructionObject lyle_read = new InstructionObject();
 		lyle_read.parseInstructions("READ LYLE OBJ");
 		InstructionObject lyle_destroy = new InstructionObject();
