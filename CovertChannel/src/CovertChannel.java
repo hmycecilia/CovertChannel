@@ -78,9 +78,9 @@ public class CovertChannel
 		
         while ((c = (byte) is.read()) != -1)
         {
-//        	System.out.println("C = : " + Integer.toString(c, 2));
+        	System.out.println("C = : " + Integer.toString(c, 2));
         	Integer nom = 0;
-        	for (int i = 7; i >= 0; i--)
+        	for (int i = 6; i >= 0; i--)
         	{
         		nom = (c & (1 << i));
         		nom >>= i;

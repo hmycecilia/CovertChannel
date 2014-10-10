@@ -2,10 +2,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
-public class ObjectManager 
+public class ObjectManager
 {
 	Integer a = 0;
-	byte num_bits = 7;
+	byte num_bits = 6;
 	
 	public HashMap<String, Object> object_map = new HashMap<String, Object>();
 
@@ -39,10 +39,10 @@ public class ObjectManager
 			a = (a | (0 << num_bits));
 		num_bits--;
 		System.out.println(a);
-		if (num_bits == 0)
+		if (num_bits == -1)
 		{
 			s.filethingy.write(new byte[]{a.byteValue()});
-			num_bits = 7;
+			num_bits = 6;
 			a= 0;
 			System.out.println();
 		}
