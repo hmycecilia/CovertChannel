@@ -14,6 +14,8 @@ public class CovertChannel
 {
 	public static void main(String[] args) throws IOException 
 	{
+		for (int goku = 0; goku < 10; goku++)
+		{
 		//create the reference monitor to hold the subjects and objects and their security levels
         ReferenceMonitor ref_mon = new ReferenceMonitor();
         
@@ -103,6 +105,7 @@ public class CovertChannel
 			log.close();
 		else
 			System.out.println(args[0] + " " + (numbytes) + " bytes " + (((numbytes * 8) / (sc.time() * 1000))) + " bits/ms");
+		}
 	}	
 
 	static List<String> readSmallTextFile(String aFileName) throws IOException 
