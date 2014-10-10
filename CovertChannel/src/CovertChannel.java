@@ -17,7 +17,6 @@ public class CovertChannel
 {
 	public static void main(String[] args) throws IOException 
 	{
-		List<String> instructions = null;
 		
         ReferenceMonitor ref_mon = new ReferenceMonitor();
                 
@@ -27,12 +26,10 @@ public class CovertChannel
         if(args.length == 1)
         {
         	path = Paths.get(args[0]);
-        	instructions = readSmallTextFile(args[0]);
         }
         else if(args.length == 2)
         {
         	path = Paths.get(args[1]);
-        	instructions = readSmallTextFile(args[1]);
         	VERBOSE = true;
         }
         
@@ -74,11 +71,10 @@ public class CovertChannel
         
 		//loop that runs and prints the status of each instruction
 		
-		byte c;
+		int c;
 		
         while ((c = (byte) is.read()) != -1)
         {
-        	System.out.println("C = : " + Integer.toString(c, 2));
         	Integer nom = 0;
         	for (int i = 6; i >= 0; i--)
         	{

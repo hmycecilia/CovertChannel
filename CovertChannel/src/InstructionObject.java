@@ -43,6 +43,5 @@ public class InstructionObject
             	}
 		}
 		
-		System.out.println("Instruction: " + command + " " + subject + " " + object + " " + value);
 	}
 }
