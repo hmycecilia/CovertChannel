@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,8 +37,9 @@ public class CovertChannel
         byte [] data = Files.readAllBytes(path);
         
         FileOutputStream out = null;
-        if(VERBOSE){	out = new FileOutputStream(args[1] + ".out");	}
-        else{	out = new FileOutputStream(args[0] + ".out");	}        	
+        PrintWriter log = null;
+        if(VERBOSE){	out = new FileOutputStream(args[1] + ".out");	log = new PrintWriter(new File("log"));}
+        else{	out = new FileOutputStream(args[0] + ".out");	}   
 
 		ByteArrayInputStream is = new ByteArrayInputStream(data);
 		
@@ -82,17 +84,19 @@ public class CovertChannel
         		nom >>= i;
         		if (nom == 0)
         		{
-        			use_hal(hal_create, ref_mon);
-        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run);
+        			use_hal(hal_create, ref_mon, log, VERBOSE);
+        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run, log, VERBOSE);
         		}
         		else
         		{
-        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run);
+        			use_lyle(ref_mon, lyle_create, lyle_write, lyle_read, lyle_destroy, lyle_run, log, VERBOSE);
         		}
         	}
         }
 
 		out.close();
+		if (VERBOSE)
+			log.close();
 	}	
 
 	static List<String> readSmallTextFile(String aFileName) throws IOException 
@@ -100,20 +104,30 @@ public class CovertChannel
 		   return Files.readAllLines(Paths.get(aFileName), StandardCharsets.UTF_8);
 	}
 	
-	private static void use_hal (InstructionObject a, ReferenceMonitor ref_mon) throws IOException
+	private static void use_hal (InstructionObject a, ReferenceMonitor ref_mon, PrintWriter log, boolean verbose) throws IOException
 
 	{
 		ref_mon.useInstruction(a);
+		if (verbose)
+			log.println("CREATE HAL OBJ");
 	}
 	
 	private static void use_lyle (ReferenceMonitor ref_mon, InstructionObject lyle_create, InstructionObject lyle_write, InstructionObject lyle_read,
-			InstructionObject lyle_destroy, InstructionObject lyle_run) throws IOException
+			InstructionObject lyle_destroy, InstructionObject lyle_run, PrintWriter log, boolean verbose) throws IOException
 	{
 		ref_mon.useInstruction(lyle_create);
 		ref_mon.useInstruction(lyle_write);
 		ref_mon.useInstruction(lyle_read);
 		ref_mon.useInstruction(lyle_destroy);
 		ref_mon.useInstruction(lyle_run);
+		if (verbose)
+		{
+			log.println("CREATE LYLE OBJ");
+			log.println("WRITE LYLE OBJ 1");
+			log.println("READ LYLE OBJ");
+			log.println("DESTROY LYLE OBJ");
+			log.println("RUN LYLE");
+		}
 	}
 }
 
