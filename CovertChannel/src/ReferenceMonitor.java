@@ -108,6 +108,7 @@ public class ReferenceMonitor
 	
 	public void executeRun(String sub) throws IOException
 	{
+		System.out.println("execute run");
 		Subject s = subject_map.get(sub);
 		System.out.println("Why is execeuteRun not running?!");
 		object_man.run(s);
