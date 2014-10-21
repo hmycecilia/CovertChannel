@@ -26,14 +26,16 @@ to use, but is a strange aspect of certain files.
 
 [Test Cases]
 We have 5 different test files each of which are included in the zip file. They are of differing sizes and we are actually 
-able to determine a bandwidth limit to our channel. 
+able to determine a bandwidth limit to our channel. These are the averages of 10 runs for each file.
 
-testInputFile 
+machine type: Intel Xeon E3-1270 V2 3.5GHz x8
 
-war_plan
+testInputFile 539 bytes 712 bits/ms
 
-pride_and_prejudice
+war_plan 28699 bytes 1121 bits/ms
 
-moby_dick
+pride_and_prejudice 704147 bytes 2052 bits/ms
 
-war_and_peace
+moby_dick 1257276 bytes 2076 bits/ms
+
+war_and_peace 3226641 bytes 2108 bits/ms
